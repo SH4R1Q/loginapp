@@ -13,7 +13,7 @@ import java.util.List;
 public class usersDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    public void searchDB(String user, String pass){
+    public boolean searchDB(String user, String pass){
         String query = "select username from users where username='"+user+"' AND password='"+pass+"'";
         try {
             List<userDetails> userName = jdbcTemplate.query(query, new RowMapper<userDetails>() {
@@ -26,13 +26,11 @@ public class usersDao {
                     return user;
                 }
             });
-            if(userName.isEmpty()){
-                System.out.println("not matched");
-            }
-            System.out.println(userName.get(0));
+            return !userName.isEmpty();
         }
         catch (Exception e){
             System.out.println(e);
         }
+        return false;
     }
 }

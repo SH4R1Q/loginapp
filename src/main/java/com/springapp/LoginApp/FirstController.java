@@ -1,24 +1,16 @@
 package com.springapp.LoginApp;
-
-import com.springapp.LoginApp.dao.usersDao;
+import java.util.List;
+import com.springapp.LoginApp.Services.LoginServices;
+import com.springapp.LoginApp.dao.userDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class FirstController {
     @Autowired
-    private usersDao dbDao;
-    @RequestMapping("/")
-    public String login(){
-        return "login";
-    }
-    @PostMapping("/")
-    public String postLogin(@RequestParam("username") String user, @RequestParam("password") String pass, Model model){
-        dbDao.searchDB(user,pass);
-        return "homepage";
+    private LoginServices loginService;
+    @PostMapping("/login/{user}/{pass}")
+    public List<userDetails> postLogin(@PathVariable String user, @PathVariable String pass){
+        return this.loginService.searchUser(user,pass);
     }
 }
