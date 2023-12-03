@@ -12,14 +12,10 @@ public class LoginServicesImpl implements LoginServices{
     private usersDao dbDao;
     List<userDetails> list;
     @Override
-    public List<userDetails> searchUser(String user, String pass) {
-        if(dbDao.searchDB(user,pass)){
-            list = new ArrayList<>();
-            list.add(new userDetails(user));
-            return list;
+    public userDetails searchUser(userDetails user) {
+        if(dbDao.searchDB(user.getUserName(), user.getPassword())){
+            return new userDetails(user.getUserName(),"OK");
         }
-        list = new ArrayList<>();
-        list.add(new userDetails(null));
-        return list;
+        return new userDetails(null,null);
     }
 }

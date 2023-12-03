@@ -1,0 +1,8 @@
+<div class="form-signin w-100 m-auto">
+    <form>
+        <h1 class="my-3 h3 mb-3 fw-normal">Login Here!</h1>
+        <input type="text" name="username" [(ngModel)] = "data.username" class="my-2 form-control username" placeholder="user5432" required autofocus>
+        <input type="text" name="password" [(ngModel)] = "data.password" class="my-2 form-control pass" placeholder="123@user" required>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="btnClick()">Login</button>
+    </form>
+</div>

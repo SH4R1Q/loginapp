@@ -29,8 +29,7 @@ public class usersDao {
             return !userName.isEmpty();
         }
         catch (Exception e){
-            System.out.println(e);
+            return false;
         }
-        return false;
     }
 }
