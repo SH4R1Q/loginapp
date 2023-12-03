@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BackendService } from '../../Services/backend.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login-page',
@@ -12,13 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class LoginPageComponent {
   data = {
-    username:"",
+    userName:"",
     password:""
   }
-  constructor(private details:BackendService){}
+  private baseUrl: String = "http://localhost:8080"
+
+  constructor(private http: HttpClient){}
   btnClick(){
-    (this.data.username.length===0 || this.data.password.length===0)?console.log("error"):
-    this.details.sendDetails(this.data).subscribe(
+    (this.data.userName.length===0 || this.data.password.length===0)?console.log("error"):
+    this.http.post(`${this.baseUrl}/login`, this.data).subscribe(
       response=>{
         console.log(response);
       },
